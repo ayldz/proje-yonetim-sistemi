@@ -16,8 +16,9 @@ namespace ProjectMan.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string t) {
-            ViewData["LoginError"] = true;
+        public ActionResult Login(FormCollection fc) {
+            pmsContext context = new pmsContext();
+            User o = (from c in context.User where c.id == 1 select c).FirstOrDefault();
 
             return View();
         }
