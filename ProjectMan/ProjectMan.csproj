@@ -157,10 +157,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Milestone.cs" />
-    <Compile Include="Models\pmsEntity.cs" />
+    <Compile Include="Models\pmsContext.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
