@@ -5,17 +5,17 @@ namespace ProjectMan.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class pmsEntity : DbContext
+    public partial class pmsContext : DbContext
     {
-        public pmsEntity()
-            : base("name=pmsEntity")
+        public pmsContext()
+            : base("name=pmsContext")
         {
         }
 
         public virtual DbSet<Company> Company { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Milestone> Milestone { get; set; }
         public virtual DbSet<Project> Project { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<User> User { get; set; }
 

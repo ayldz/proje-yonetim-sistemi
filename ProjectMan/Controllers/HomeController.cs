@@ -11,8 +11,7 @@ namespace ProjectMan.Controllers
     {
         // GET: Home
         public ActionResult Index()
-        {
-            pmsEntity db = new pmsEntity();
+        { 
             return View();
         }
     }
