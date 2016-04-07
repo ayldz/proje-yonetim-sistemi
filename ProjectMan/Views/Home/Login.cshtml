@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Kullanıcı Giriş";
+    Layout = "~/Views/Shared/_FullWidth.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-lg-4 col-lg-offset-4">
+        
+        <h3 class="form-signin-heading">Lütfen Giriş Yapın</h3>
+
+        @if (ViewData.Keys.Contains("LoginError"))
+        {
+        <div class="alert alert-danger">
+            <strong>Uyarı!</strong> Yanlış Kullanıcı Adı veya Parola girildi.
+        </div>
+        }
+
+        <form role="form">
+
+            <div class="form-group">
+                <label class="control-label" for="inputSuccess">Kullanıcı Adı:</label>
+                <input class="form-control" id="inputSuccess" type="text">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="inputWarning">Parola:</label>
+                <input class="form-control" id="inputWarning" type="text">
+            </div>
+
+            @*<div class="form-group">
+                <label class="control-label" for="inputError">Beni Hatırla</label>
+                <input class="form-control" id="inputError" type="checkbox">
+            </div>*@
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Oturum Aç</button>
+        </form>
+    </div>
+</div>
+

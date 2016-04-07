@@ -10,9 +10,19 @@ namespace ProjectMan.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Login()
         {
-            pmsEntity db = new pmsEntity();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string t) {
+            ViewData["LoginError"] = true;
+
+            return View();
+        }
+
+        public ActionResult Dashboard() {
             return View();
         }
     }
