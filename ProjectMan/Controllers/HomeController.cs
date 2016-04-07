@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMan.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace ProjectMan.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            pmsEntity db = new pmsEntity();
             return View();
         }
     }
