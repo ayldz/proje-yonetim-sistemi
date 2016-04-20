@@ -20,7 +20,7 @@ namespace ProjectMan.Controllers
             pmsContext context = new pmsContext();
             User o = (from c in context.User where c.id == 1 select c).FirstOrDefault();
 
-            return View();
+            return Redirect("/Home/Dashboard");
         }
 
         public ActionResult Dashboard() {
