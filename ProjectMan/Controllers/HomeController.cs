@@ -17,14 +17,33 @@ namespace ProjectMan.Controllers
 
         [HttpPost]
         public ActionResult Login(FormCollection fc) {
-            pmsContext context = new pmsContext();
-            User o = (from c in context.User where c.id == 1 select c).FirstOrDefault();
+            String Username = fc["username"];
+            String Password = fc["password"];
 
-            return Redirect("/Home/Dashboard");
+            Boolean success = SessionHelper.Current.Login(Username, Password);
+            if (success)
+            {
+                return Redirect("/Home/Dashboard");
+            }
+            else {
+                ViewData["LoginError"] = true;
+                return View();
+            }
         }
 
         public ActionResult Dashboard() {
-            return View();
+            if (SessionHelper.Current.WhoAmI() != null){
+                return View();
+            }
+            else {
+                return Redirect("/Home/Login");
+            }
         }
+
+        public ActionResult Logout() {
+            SessionHelper.Current.Logout();
+            return Redirect("/Home/Dashboard");
+        }
+
     }
 }
