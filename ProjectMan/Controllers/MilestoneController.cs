@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ProjectMan.Controllers
 {
+    [LoggedIn]
     public class MilestoneController : Controller
     {
         // GET: Milestone

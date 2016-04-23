@@ -161,6 +161,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LoggedInAttribute.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Milestone.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\SessionHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
