@@ -184,6 +184,10 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Milestone\Details.cshtml" />
     <Content Include="Views\Milestone\Create.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -193,10 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Company\" />
-    <Folder Include="Views\Project\" />
-    <Folder Include="Views\Task\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
