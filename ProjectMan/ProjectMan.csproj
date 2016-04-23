@@ -182,6 +182,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_FullWidth.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Milestone\Details.cshtml" />
+    <Content Include="Views\Milestone\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -192,7 +194,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Company\" />
-    <Folder Include="Views\Milestone\" />
     <Folder Include="Views\Project\" />
     <Folder Include="Views\Task\" />
     <Folder Include="Views\User\" />

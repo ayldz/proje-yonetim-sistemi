@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header">
+    <h1>Create</h1>
+</div>
+
+<form>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="milestoneName" class="col-sm-1 form-control-label">Adı:</label>
+            <div class="col-sm-11">
+                <input type="text" class="form-control" id="milestoneName" placeholder="Yeni Kilometre Taşı">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label for="projectName" class="col-sm-2 form-control-label">Adı:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="projectName" placeholder="Proje">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="testName" class="col-sm-2 form-control-label">Test:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="projectName" placeholder="Test">
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Kaydet </button>
+
+</form>
