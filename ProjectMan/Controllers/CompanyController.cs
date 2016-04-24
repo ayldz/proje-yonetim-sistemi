@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMan.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,8 +33,10 @@ namespace ProjectMan.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                pmsContext context = new pmsContext();
+                Company comp = FormCollectionToModel(collection);
+                context.Company.Add(comp);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -84,6 +87,20 @@ namespace ProjectMan.Controllers
             {
                 return View();
             }
+        }
+
+        private Company FormCollectionToModel(FormCollection fc)
+        {
+            var model = new Company();
+
+            model.name = fc["companyName"];
+            model.adress = fc["companyAdress"];
+            model.billedto = fc["billedTo"];
+            model.contactname = fc["contactName"];
+            model.contactemail = fc["contactEmail"];
+            model.cantacttel = fc["contactTel"];
+
+            return model;
         }
     }
 }

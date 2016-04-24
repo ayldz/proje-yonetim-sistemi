@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMan.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,8 +34,10 @@ namespace ProjectMan.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                pmsContext context = new pmsContext();
+                Milestone mile = FormCollectionToModel(collection);
+                context.Milestone.Add(mile);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -85,6 +88,17 @@ namespace ProjectMan.Controllers
             {
                 return View();
             }
+        }
+
+        private Milestone FormCollectionToModel(FormCollection fc)
+        {
+            var mile = new Milestone();
+
+            mile.name = fc["milestoneName"];
+            mile.progress = Convert.ToInt32(fc["progress"]);
+            mile.project = Convert.ToInt32(fc["proje"]);
+
+            return mile;
         }
     }
 }

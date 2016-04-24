@@ -89,10 +89,10 @@ namespace ProjectMan.Controllers
             }
         }
 
-        private Project FormCollectionToModel(FormCollection fc) {
-
-
+        private Project FormCollectionToModel(FormCollection fc)
+        {
             var model = new Project();
+
             model.name = fc["projectName"];
             model.startdateplanned = new DateTime(Convert.ToInt32(fc["startDatePlanned"].Split('/')[2]), Convert.ToInt32(fc["startDatePlanned"].Split('/')[1]), Convert.ToInt32(fc["startDatePlanned"].Split('/')[0]));
             model.enddateplanned = new DateTime(Convert.ToInt32(fc["endDatePlanned"].Split('/')[2]), Convert.ToInt32(fc["endDatePlanned"].Split('/')[1]), Convert.ToInt32(fc["endDatePlanned"].Split('/')[0]));

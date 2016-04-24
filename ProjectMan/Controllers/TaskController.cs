@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMan.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,8 +33,10 @@ namespace ProjectMan.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                pmsContext context = new pmsContext();
+                Task gorev = FormCollectionToModel(collection);
+                context.Task.Add(gorev);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -84,6 +87,30 @@ namespace ProjectMan.Controllers
             {
                 return View();
             }
+        }
+
+        private Task FormCollectionToModel(FormCollection fc)
+        {
+
+            string[] sdp = fc["startDatePlanned"].Split('/');
+            string[] sda = fc["startDateActual"].Split('/');
+            string[] edp = fc["endDatePlanned"].Split('/');
+            string[] eda = fc["endDateActual"].Split('/');
+
+            var gorev = new Task();
+
+            gorev.name = fc["taskName"];
+            gorev.description = fc["descriptionName"];
+            gorev.startdateplanned = new DateTime(Convert.ToInt32(sdp[2]),Convert.ToInt32(sdp[1]),Convert.ToInt32(sdp[0]));
+            gorev.enddateplanned = new DateTime(Convert.ToInt32(edp[2]), Convert.ToInt32(edp[1]), Convert.ToInt32(edp[0]));
+            gorev.startdateactual = new DateTime(Convert.ToInt32(sda[2]), Convert.ToInt32(sda[1]), Convert.ToInt32(sda[0]));
+            gorev.enddateplanned = new DateTime(Convert.ToInt32(eda[2]), Convert.ToInt32(eda[1]), Convert.ToInt32(eda[0]));
+            gorev.progress = Convert.ToInt16(fc["progress"]);
+            gorev.project = Convert.ToInt32(fc["proje"]);
+            gorev.milestone = Convert.ToInt32(fc["milestone"]);
+            gorev.assingto = Convert.ToInt32(fc["assingTo"]);
+
+            return gorev;
         }
     }
 }
