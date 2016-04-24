@@ -7,12 +7,12 @@
     <h1>Create</h1>
 </div>
 
-<form>
+<form action="Create" method="post">
     <div class="form-group row">
         <div class="col-sm-12">
             <label for="projectName" class="col-sm-2 form-control-label">Proje Adı :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="projectName" placeholder="Yeni Proje">
+                <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Yeni Proje">
             </div>
         </div>
     </div>
@@ -21,14 +21,14 @@
         <div class="form-group col-sm-6">
             <label for="startDatePlanned" class="col-sm-4 form-control-label">Planlanan Başlangıç Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="startDatePlanned" placeholder="Tarih" data-type="date">
+                <input type="text" class="form-control" id="startDatePlanned" name="startDatePlanned" placeholder="Tarih" data-type="date">
             </div>
         </div>
 
         <div class="form-group col-sm-6">
             <label for="startDateActual" class="col-sm-4 form-control-label">Gerçekleşen Başlangıç Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="startDateActual" placeholder="Tarih" data-type="date">
+                <input type="text" class="form-control" id="startDateActual" name="startDateActual" placeholder="Tarih" data-type="date">
             </div>
         </div>
     </div>
@@ -37,15 +37,15 @@
         <div class="form-group col-sm-6">
             <label for="endDatePlanned" class="col-sm-4 form-control-label">Planlanan Bitiş Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="endDatePlanned" placeholder="Tarih" data-type="date">
+                <input type="text" class="form-control" id="endDatePlanned" name="endDatePlanned" placeholder="Tarih" data-type="date">
             </div>
         </div>
 
         <div class="form-group col-sm-6">
             <label for="endDateActual" class="col-sm-4 form-control-label">Gerçekleşen Bitiş Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="endDateActual" placeholder="Tarih" data-type="date">
-            </div>
+                <input type="text" class="form-control" id="endDateActual" name="endDateActual" placeholder="Tarih" data-type="date">
+            </div> 
         </div>
     </div>
 
@@ -53,7 +53,7 @@
         <div class="col-sm-12">
             <label for="progress" class="col-sm-2 form-control-label">İlerleme Durumu :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="progress" placeholder="İlerleme Durumu">
+                <input type="text" class="form-control" id="progress" name="progress" placeholder="İlerleme Durumu">
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
         <div class="col-sm-12">
             <label for="company" class="col-sm-2 form-control-label">Şirket :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="company" placeholder="Şirket">
+                <input type="text" class="form-control" id="company" name="company" placeholder="Şirket">
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
         <div class="col-sm-12">
             <label for="projectManager" class="col-sm-2 form-control-label">Proje Yöneticisi :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="projectManager" placeholder="Proje Yöneticisi">
+                <input type="text" class="form-control" id="projectManager" name="projectManager" placeholder="Proje Yöneticisi">
             </div>
         </div>
     </div>

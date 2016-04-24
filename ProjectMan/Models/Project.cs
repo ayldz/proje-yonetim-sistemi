@@ -9,6 +9,8 @@ namespace ProjectMan.Models
     [Table("Project")]
     public partial class Project
     {
+        internal DateTime startDateActual;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Project()
         {
