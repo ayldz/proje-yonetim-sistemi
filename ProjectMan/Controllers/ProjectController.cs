@@ -12,7 +12,8 @@ namespace ProjectMan.Controllers
         // GET: Project
         public ActionResult Index()
         {
-            return View();
+            pmsContext context = new pmsContext();
+            return View(context.Project.ToList());
         }
 
         // GET: Project/Details/5

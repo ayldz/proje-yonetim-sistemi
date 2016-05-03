@@ -13,7 +13,8 @@ namespace ProjectMan.Controllers
         // GET: Milestone
         public ActionResult Index()
         {
-            return View();
+            pmsContext context = new pmsContext();
+            return View(context.Milestone.ToList());
         }
 
         // GET: Milestone/Details/5

@@ -190,6 +190,11 @@
     <Content Include="Views\Task\Create.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Milestone\Index.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
