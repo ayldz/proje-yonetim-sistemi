@@ -71,24 +71,14 @@ namespace ProjectMan.Controllers
         // GET: User/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            User user = context.User.Find(id);
+            context.User.Remove(user);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         private User FormCollectionToModel(FormCollection fc)
         {

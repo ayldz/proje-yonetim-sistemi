@@ -72,24 +72,14 @@ namespace ProjectMan.Controllers
         // GET: Milestone/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Milestone ms = context.Milestone.Find(id);
+            context.Milestone.Remove(ms);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        // POST: Milestone/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         private Milestone FormCollectionToModel(FormCollection fc)
         {

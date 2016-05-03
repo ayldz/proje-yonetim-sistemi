@@ -71,24 +71,14 @@ namespace ProjectMan.Controllers
         // GET: Company/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Company comp = context.Company.Find(id);
+            context.Company.Remove(comp);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        // POST: Company/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         private Company FormCollectionToModel(FormCollection fc)
         {
