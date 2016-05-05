@@ -1,6 +1,7 @@
 ﻿using ProjectMan.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -49,23 +50,25 @@ namespace ProjectMan.Controllers
         // GET: Project/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Project proje = context.Project.Find(id);
+
+            return View(proje);
         }
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,name,startdateplanned,enddateplanned,stardateactual,enddateactual,progress,company,projectmanager")] Project project)
         {
-            try
+            pmsContext context = new pmsContext();
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                context.Entry(project).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch 
-            {
-                return View();
-            }
+            return View(project);
         }
 
         // GET: Project/Delete/5
