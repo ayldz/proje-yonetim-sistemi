@@ -49,7 +49,9 @@ namespace ProjectMan.Controllers
         // GET: Task/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Task gorev = context.Task.Find(id);
+            return View(gorev);
         }
 
         // POST: Task/Edit/5
@@ -58,7 +60,12 @@ namespace ProjectMan.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                Task task = this.FormCollectionToModel(collection);
+                task.id = id;
+
+                pmsContext context = new pmsContext();
+                context.Entry(task).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }

@@ -1,0 +1,98 @@
+﻿@model ProjectMan.Models.Task
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header">
+    <h2>Edit</h2>
+</div>
+
+<form action="@Model.id" method="post">
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="taskName" class="col-sm-2 form-control-label">Görev Adı :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="taskName" name="taskName" placeholder="Yeni Task" value="@Model.name">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="descriptionName" class="col-sm-2 form-control-label">Açıklama :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="descriptionName" name="descriptionName" placeholder="Açıklama" value="@Model.description">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label for="startDatePlanned" class="col-sm-4 form-control-label">Planlanan Başlangıç Tarihi :</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="startDatePlanned" name="startDatePlanned" placeholder="Tarih" data-type="date" value="@Model.startdateplanned">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="startDateActual" class="col-sm-4 form-control-label">Gerçekleşen Başlangıç Tarihi :</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="startDateActual" name="startDateActual" placeholder="Tarih" data-type="date" value="@Model.startdateactual">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label for="endDatePlanned" class="col-sm-4 form-control-label">Planlanan Bitiş Tarihi :</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="endDatePlanned" name="endDatePlanned" placeholder="Tarih" data-type="date" value="@Model.startdateactual">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="endDateActual" class="col-sm-4 form-control-label">Gerçekleşen Bitiş Tarihi :</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="endDateActual" name="endDateActual" placeholder="Tarih" data-type="date" value="@Model.enddateactual">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="progress" class="col-sm-2 form-control-label">İlerleme Durumu :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="progress" name="progress" placeholder="İlerleme Durumu" value="@Model.progress">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="proje" class="col-sm-2 form-control-label">Proje :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="proje" name="proje" placeholder="Proje" value="@Model.project">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="milestone" class="col-sm-2 form-control-label">Kilometre Taşı :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="milestone" name="milestone" placeholder="Kilometre Taşı" value="@Model.milestone">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="assingTo" class="col-sm-2 form-control-label">Atanan Kişi</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="assingTo" name="assingTo" placeholder="Atanan Kişi" value="@Model.assingto">
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Kaydet </button>
+</form>
