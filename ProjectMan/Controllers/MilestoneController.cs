@@ -105,7 +105,7 @@ namespace ProjectMan.Controllers
 
             mile.name = fc["milestoneName"];
             mile.progress = Convert.ToInt32(fc["progress"]);
-            mile.project = Convert.ToInt32(fc["proje"]);
+            mile.project = Convert.ToInt32(fc["project"]);
 
             return mile;
         }
