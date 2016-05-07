@@ -16,6 +16,7 @@ namespace ProjectMan.Models
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Milestone> Milestone { get; set; }
         public virtual DbSet<Project> Project { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<User> User { get; set; }
 
@@ -43,6 +44,12 @@ namespace ProjectMan.Models
                 .HasMany(e => e.Task)
                 .WithRequired(e => e.Project1)
                 .HasForeignKey(e => e.project)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Company)
+                .WithRequired(e => e.User1)
+                .HasForeignKey(e => e.user)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()

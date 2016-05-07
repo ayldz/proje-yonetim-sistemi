@@ -20,7 +20,7 @@ namespace ProjectMan.Models
         [Required]
         [StringLength(50)]
         public string name { get; set; }
-
+         
         [Required]
         [StringLength(150)]
         public string adress { get; set; }
@@ -39,7 +39,11 @@ namespace ProjectMan.Models
 
         [Required]
         [StringLength(50)]
-        public string cantacttel { get; set; }
+        public string contacttel { get; set; }
+
+        public int user { get; set; }
+
+        public virtual User User1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Project { get; set; }

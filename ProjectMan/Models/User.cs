@@ -12,6 +12,7 @@ namespace ProjectMan.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            Company = new HashSet<Company>();
             Project = new HashSet<Project>();
             Task = new HashSet<Task>();
         }
@@ -35,6 +36,9 @@ namespace ProjectMan.Models
         public string surname { get; set; }
 
         public int position { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Company> Company { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Project { get; set; }

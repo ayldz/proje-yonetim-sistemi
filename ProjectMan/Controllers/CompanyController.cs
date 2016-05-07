@@ -102,7 +102,7 @@ namespace ProjectMan.Controllers
             model.billedto = fc["billedTo"];
             model.contactname = fc["contactName"];
             model.contactemail = fc["contactEmail"];
-            model.cantacttel = fc["contactTel"];
+            model.contacttel = fc["contactTel"];
 
             return model;
         }
