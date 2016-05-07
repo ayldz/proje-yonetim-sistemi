@@ -89,7 +89,7 @@
         <div class="col-sm-12">
             <label for="assingTo" class="col-sm-2 form-control-label">Atanan Kişi</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="assingTo" name="assingTo" placeholder="Atanan Kişi">
+                @{Html.RenderAction("RenderOption", "User", new { name = "assingTo" });}
             </div>
         </div>
     </div>

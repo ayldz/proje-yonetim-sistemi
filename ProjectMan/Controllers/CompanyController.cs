@@ -92,6 +92,13 @@ namespace ProjectMan.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult RenderOption(String name, Int32? value)
+        {
+            pmsContext context = new pmsContext();
+            List<Company> list = context.Company.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, Helpers.DataOperations.Read)).ToList();
+            Tuple<string, Int32?, List<Company>> model = new Tuple<string, Int32?, List<Company>>(name, value, list);
+            return PartialView("_CompanySelect", model);
+        }
 
         private Company FormCollectionToModel(FormCollection fc)
         {
