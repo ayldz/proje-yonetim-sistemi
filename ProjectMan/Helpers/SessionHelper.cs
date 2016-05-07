@@ -1,4 +1,5 @@
-﻿using ProjectMan.Models;
+﻿using ProjectMan.Helpers;
+using ProjectMan.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Web;
 
 namespace ProjectMan
 {
+
     public class SessionHelper
     {
         private SessionHelper()
@@ -61,6 +63,35 @@ namespace ProjectMan
                     return false;
                 }
             }
+        }
+
+        public Boolean AuthorizedFor(object model, DataOperations action) {
+
+            if ((UserPositions)WhoAmI().position == UserPositions.Admin) {
+                return true;
+            }
+
+            AuthorizationBase auth = AuthorizationHelper.GetHelper(model);
+
+            if (action == DataOperations.Create) {
+                return auth.Create();
+            }
+            else if (action == DataOperations.Read)
+            {
+                return auth.Read();
+            }
+            else if (action == DataOperations.Update)
+            {
+                return auth.Update();
+            }
+            else if (action == DataOperations.Delete)
+            {
+                return auth.Delete();
+            }
+            else {
+                return false;
+            }
+
         }
 
         public Models.User WhoAmI() {

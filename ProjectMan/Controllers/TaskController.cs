@@ -14,7 +14,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.Task.ToList());
+            return View(context.Task.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, Helpers.DataOperations.Read) == true).ToList());
         }
 
         // GET: Task/Details/5
@@ -79,12 +79,20 @@ namespace ProjectMan.Controllers
         // GET: Task/Delete/5
         public ActionResult Delete(int id)
         {
+
             pmsContext context = new pmsContext();
             Task tsk = context.Task.Find(id);
-            context.Task.Remove(tsk);
-            context.SaveChanges();
 
-            return RedirectToAction("Index");
+            if (SessionHelper.Current.AuthorizedFor(tsk, Helpers.DataOperations.Delete))
+            {
+                context.Task.Remove(tsk);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            else {
+                return RedirectToAction("Index");
+            }
         }
 
         private Task FormCollectionToModel(FormCollection fc)
