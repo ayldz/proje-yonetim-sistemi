@@ -1,9 +1,16 @@
 ﻿$("document").ready(init);
 
 function init() {
+    expand();
     renderDateTables();
     renderDatePickers();
     renderSelects();
+}
+
+function expand() {
+    var height = window.innerHeight;
+    $("#page-wrapper").css("height", height - 50);
+    $("#page-wrapper").css("overflow", "scroll-x");
 }
 
 function renderDateTables() {
