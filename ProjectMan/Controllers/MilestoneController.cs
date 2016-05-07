@@ -50,7 +50,10 @@ namespace ProjectMan.Controllers
         // GET: Milestone/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Milestone kmtas = context.Milestone.Find(id);
+
+            return View(kmtas);
         }
 
         // POST: Milestone/Edit/5
@@ -59,7 +62,12 @@ namespace ProjectMan.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                Milestone kmtas = this.FormCollectionToModel(collection);
+                kmtas.id = id;
+
+                pmsContext context = new pmsContext();
+                context.Entry(kmtas).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }

@@ -5,66 +5,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="page-header">
+    <h2>Edit</h2>
+</div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.surname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.surname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.surname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.position, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.position, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.position, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+<form action="@Model.id" method="post">
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="userName" class="col-sm-2 form-control-label">Kullanıcı Adı :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="userName" name="userName" placeholder="Kullanıcı Adı" value="@Model.username">
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="password" class="col-sm-2 form-control-label">Şifre :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="password" name="password" placeholder="Şifre" value="@Model.password">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="name" class="col-sm-2 form-control-label">Ad :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Ad" value="@Model.name">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="soyad" class="col-sm-2 form-control-label">Soyad :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="soyad" name="soyad" placeholder="Soyad" value="@Model.surname">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="pozisyon" class="col-sm-2 form-control-label">Pozisyon :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="pozisyon" name="pozisyon" placeholder="Pozisyon" value="@Model.position">
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Kaydet </button>
+</form>
