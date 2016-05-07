@@ -62,7 +62,7 @@
         <div class="col-sm-12">
             <label for="company" class="col-sm-2 form-control-label">Şirket :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="company" name="company" placeholder="Şirket">
+                @{Html.RenderAction("RenderOption", "Company", new { name = "company" });}               
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
         <div class="col-sm-12">
             <label for="projectManager" class="col-sm-2 form-control-label">Proje Yöneticisi :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="projectManager" name="projectManager" placeholder="Proje Yöneticisi">
+                @{Html.RenderAction("RenderOption", "User", new { name = "projectManager" });}               
             </div>
         </div>
     </div>
