@@ -1,9 +1,7 @@
-﻿using ProjectMan.Models;
+﻿using ProjectMan.Helpers;
+using ProjectMan.Models;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ProjectMan.Controllers
@@ -15,7 +13,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.Company.ToList());
+            return View(context.Company.ToList().Where(c => SessionHelper.Current.AuthorizedFor(c,DataOperations.Read)).ToList());
         }
 
         // GET: Company/Details/5
@@ -23,8 +21,14 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             Company comp = context.Company.Find(id);
-
-            return View(comp);
+            if (SessionHelper.Current.AuthorizedFor(comp, DataOperations.Read))
+            {
+                return View(comp);
+            }
+            else {
+                ViewData["Error"] = "Bu Şirket bilgilerini görüntüleme yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Company/Create
