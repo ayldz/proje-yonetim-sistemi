@@ -1,10 +1,10 @@
 ﻿@model ProjectMan.Models.Task
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Güncelle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="page-header">
-    <h2>Edit</h2>
+    <h2>Güncelle: @Model.name</h2>
 </div>
 
 <form action="@Model.id" method="post">
@@ -94,5 +94,5 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary"> Kaydet </button>
+    <button type="submit" class="btn btn-primary"> Kaydet </button> <a href="/Task/Index" class="btn btn-primary" >Geri Dön</a>
 </form>

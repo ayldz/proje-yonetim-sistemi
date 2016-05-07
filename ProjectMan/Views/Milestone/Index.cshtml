@@ -1,35 +1,58 @@
 ﻿@model IEnumerable<ProjectMan.Models.Milestone>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kilometre Taşı";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <h2>Kilometre Taşı</h2>
+</div>
 
 <p>
-    @Html.ActionLink("Yeni", "Create")
+    <a href="/Milestone/Create" class="btn btn-primary"> Yeni Kilometre Taşı</a>
 </p>
-<table>
-    <tr>
-        <th>
-            Miles Stone Name
-        </th>
-        <th>
 
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<table class="table datatable">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
+            <th>
+                Kilometre Taşı
+            </th>
+            <th>
+                Proje
+            </th>
+            <th>
+                İlerleme Durumu
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td width="30">
+                @item.name
             </td>
-            <td>
+            <td width="30">
+                @item.Project1.name
+            </td>
+            <td width="10%">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow=" @item.progress "
+                         aria-valuemin="0" aria-valuemax="100" style="width:@item.progress%">
+                        <span class="sr-only">%@item.progress </span>
+                    </div>
+                </div>
+            </td>
+            <td style="text-align: right" width="20%">
                 @Html.ActionLink("Güncelle", "Edit", new { id = item.id }) |
                 @Html.ActionLink("Detay", "Details", new { id = item.id }) |
                 @Html.ActionLink("Sil", "Delete", new { id = item.id })
             </td>
         </tr>
-    }
-
+        }
+    </tbody>
 </table>

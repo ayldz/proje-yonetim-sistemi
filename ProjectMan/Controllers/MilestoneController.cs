@@ -20,7 +20,10 @@ namespace ProjectMan.Controllers
         // GET: Milestone/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Milestone mile = context.Milestone.Find(id);
+
+            return View(mile);
         }
 
         // GET: Milestone/Create

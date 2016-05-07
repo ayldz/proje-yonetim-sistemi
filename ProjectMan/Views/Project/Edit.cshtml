@@ -1,11 +1,11 @@
 ﻿@model ProjectMan.Models.Project
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Güncelle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="page-header">
-    <h2>Edit</h2>
+    <h2>Güncelle: @Model.name</h2>
 </div>
 
 <form action="@Model.id" method="post">
@@ -22,14 +22,14 @@
         <div class="form-group col-sm-6">
             <label for="startDatePlanned" class="col-sm-4 form-control-label">Planlanan Başlangıç Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="startDatePlanned" name="startDatePlanned" placeholder="Tarih" data-type="date" value="@Model.startdateplanned">
+                <input type="text" class="form-control" id="startDatePlanned" name="startDatePlanned" placeholder="Tarih" data-type="date" value="@Model.startdateplanned.ToString("dd'/'MM'/'yyyy")">
             </div>
         </div>
 
         <div class="form-group col-sm-6">
             <label for="startDateActual" class="col-sm-4 form-control-label">Gerçekleşen Başlangıç Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="startDateActual" name="startDateActual" placeholder="Tarih" data-type="date" value="@Model.stardateactual">
+                <input type="text" class="form-control" id="startDateActual" name="startDateActual" placeholder="Tarih" data-type="date" value="@Model.stardateactual.ToString("dd'/'MM'/'yyyy")">
             </div>
         </div>
     </div>
@@ -38,14 +38,14 @@
         <div class="form-group col-sm-6">
             <label for="endDatePlanned" class="col-sm-4 form-control-label">Planlanan Bitiş Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="endDatePlanned" name="endDatePlanned" placeholder="Tarih" data-type="date" value="@Model.enddateplanned">
+                <input type="text" class="form-control" id="endDatePlanned" name="endDatePlanned" placeholder="Tarih" data-type="date" value="@Model.enddateplanned.ToString("dd'/'MM'/'yyyy")">
             </div>
         </div>
 
         <div class="form-group col-sm-6">
             <label for="endDateActual" class="col-sm-4 form-control-label">Gerçekleşen Bitiş Tarihi :</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="endDateActual" name="endDateActual" placeholder="Tarih" data-type="date" value="@Model.enddateactual">
+                <input type="text" class="form-control" id="endDateActual" name="endDateActual" placeholder="Tarih" data-type="date" value="@Model.enddateactual.ToString("dd'/'MM'/'yyyy")">
             </div>
         </div>
     </div>
@@ -77,5 +77,5 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary"> Kaydet </button>
+    <button type="submit" class="btn btn-primary"> Kaydet </button> <a href="/Project/Index" class="btn btn-primary">Geri Dön</a>
 </form>

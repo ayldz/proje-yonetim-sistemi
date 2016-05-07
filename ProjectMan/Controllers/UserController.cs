@@ -21,7 +21,10 @@ namespace ProjectMan.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            User kullanici = context.User.Find(id);
+
+            return View(kullanici);
         }
 
         // GET: User/Create

@@ -21,7 +21,10 @@ namespace ProjectMan.Controllers
         // GET: Project/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Project proje = context.Project.Find(id);
+
+            return View(proje);
         }
 
         // GET: Project/Create
@@ -97,7 +100,7 @@ namespace ProjectMan.Controllers
             model.name = fc["projectName"];
             model.startdateplanned = new DateTime(Convert.ToInt32(fc["startDatePlanned"].Split('/')[2]), Convert.ToInt32(fc["startDatePlanned"].Split('/')[1]), Convert.ToInt32(fc["startDatePlanned"].Split('/')[0]));
             model.enddateplanned = new DateTime(Convert.ToInt32(fc["endDatePlanned"].Split('/')[2]), Convert.ToInt32(fc["endDatePlanned"].Split('/')[1]), Convert.ToInt32(fc["endDatePlanned"].Split('/')[0]));
-            model.startDateActual = new DateTime(Convert.ToInt32(fc["startDateActual"].Split('/')[2]), Convert.ToInt32(fc["startDateActual"].Split('/')[1]), Convert.ToInt32(fc["startDateActual"].Split('/')[0]));
+            model.stardateactual = new DateTime(Convert.ToInt32(fc["startDateActual"].Split('/')[2]), Convert.ToInt32(fc["startDateActual"].Split('/')[1]), Convert.ToInt32(fc["startDateActual"].Split('/')[0]));
             model.enddateactual = new DateTime(Convert.ToInt32(fc["endDateActual"].Split('/')[2]), Convert.ToInt32(fc["endDateActual"].Split('/')[1]), Convert.ToInt32(fc["endDateActual"].Split('/')[0]));
             model.progress = Convert.ToInt16(fc["progress"]);
             model.company = Convert.ToInt32(fc["company"]);

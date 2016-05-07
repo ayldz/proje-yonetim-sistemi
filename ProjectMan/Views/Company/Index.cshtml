@@ -1,35 +1,59 @@
 ﻿@model IEnumerable<ProjectMan.Models.Company>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Şirketler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <h2>Şirketler</h2>
+</div>
 
 <p>
-    @Html.ActionLink("Yeni", "Create")
+    <a href="/Company/Create" class="btn btn-primary">Yeni Şirket</a>
 </p>
-<table>
-    <tr>
-        <th>
-            Company Name
-        </th>
-        <th>
 
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<table class="table datatable">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.ActionLink("Güncelle", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Detay", "Details", new { id = item.id }) |
-                @Html.ActionLink("Sil", "Delete", new { id = item.id })
-            </td>
-        </tr>
-    }
+            <th>
+                Şirket Adı
+            </th>
+            <th>
+                Yetkili kişi
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th>
+                Telefon
+            </th>
+            <th>
 
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="35%">
+                    @item.name
+                </td>
+                <td width="15%">
+                    @item.contactname
+                </td>
+                <td width="15%">
+                    @item.contactemail
+                </td>
+                <td width="15%">
+                    @item.cantacttel
+                </td>
+                <td style="text-align: right" width="20%">
+                    @Html.ActionLink("Güncelle", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Detay", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Sil", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
