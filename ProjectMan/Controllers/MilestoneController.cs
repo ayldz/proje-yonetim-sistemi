@@ -91,7 +91,11 @@ namespace ProjectMan.Controllers
             return RedirectToAction("Index");
         }
 
+      /*  public ActionResult RenderOption()
+        {
 
+        }
+        */
         private Milestone FormCollectionToModel(FormCollection fc)
         {
             var mile = new Milestone();

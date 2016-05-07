@@ -16,7 +16,6 @@ namespace ProjectMan.Models
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Milestone> Milestone { get; set; }
         public virtual DbSet<Project> Project { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<User> User { get; set; }
 

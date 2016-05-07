@@ -1,0 +1,58 @@
+﻿@model ProjectMan.Models.User
+
+@{
+    ViewBag.Title = "Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2>Detay: @Model.name</h2>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="userName" class="col-sm-2 form-control-label">Kullanıcı Adı :</label>
+        <div class="col-sm-10">
+            @Model.username
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="password" class="col-sm-2 form-control-label">Şifre :</label>
+        <div class="col-sm-10">
+            @Model.password
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="name" class="col-sm-2 form-control-label">Ad :</label>
+        <div class="col-sm-10">
+            @Model.name
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="soyad" class="col-sm-2 form-control-label">Soyad :</label>
+        <div class="col-sm-10">
+            @Model.surname
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="pozisyon" class="col-sm-2 form-control-label">Pozisyon :</label>
+        <div class="col-sm-10">
+            @Model.position
+        </div>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary"> Kaydet </button> <a href="/User/Index" class="btn btn-primary">Geri Dön</a>
+
