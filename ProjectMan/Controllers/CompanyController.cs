@@ -1,6 +1,7 @@
 ﻿using ProjectMan.Helpers;
 using ProjectMan.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -13,7 +14,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.Company.ToList().Where(c => SessionHelper.Current.AuthorizedFor(c,DataOperations.Read)).ToList());
+            return View(context.Company.ToList().Where(c => SessionHelper.Current.AuthorizedFor(c, DataOperations.Read)).ToList());
         }
 
         // GET: Company/Details/5
@@ -25,9 +26,10 @@ namespace ProjectMan.Controllers
             {
                 return View(comp);
             }
-            else {
-                ViewData["Error"] = "Bu Şirket bilgilerini görüntüleme yetkiniz bulunmamaktadır.";
-                return RedirectToAction("Index", "Home");
+            else
+            {
+                TempData["Error"] = "Bu Şirket bilgilerini görüntüleme yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
             }
         }
 
@@ -45,9 +47,19 @@ namespace ProjectMan.Controllers
             {
                 pmsContext context = new pmsContext();
                 Company comp = FormCollectionToModel(collection);
-                context.Company.Add(comp);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (SessionHelper.Current.AuthorizedFor(comp, DataOperations.Create))
+                {
+                    context.Company.Add(comp);
+                    context.SaveChanges();
+                    TempData["Info"] = "Yeni şirket kaydı oluşturuldu";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = "Yeni Şirket kaydetmek için için yetkiniz bulunmamaktadır.";
+                    return RedirectToAction("Create");
+                }
             }
             catch
             {
@@ -61,7 +73,15 @@ namespace ProjectMan.Controllers
             pmsContext context = new pmsContext();
             Company comp = context.Company.Find(id);
 
-            return View(comp);
+            if (SessionHelper.Current.AuthorizedFor(comp, DataOperations.Update))
+            {
+                return View(comp);
+            }
+            else
+            {
+                TempData["Error"] = "Bu şirket kaydını güncellemek için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Company/Edit/5
@@ -77,6 +97,8 @@ namespace ProjectMan.Controllers
                 context.Entry(comp).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
+                TempData["Info"] = "Şirket bilgileri başarı ile güncellendi.";
+
                 return RedirectToAction("Index");
             }
             catch
@@ -90,10 +112,17 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             Company comp = context.Company.Find(id);
-            context.Company.Remove(comp);
-            context.SaveChanges();
-
-            return RedirectToAction("Index");
+            if (SessionHelper.Current.AuthorizedFor(comp, DataOperations.Delete))
+            {
+                context.Company.Remove(comp);
+                context.SaveChanges();
+                TempData["Info"] = "1 Kayıt Silindi.";
+                return RedirectToAction("Index");
+            }
+            else {
+                TempData["Error"] = "Silme işlemi için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult RenderOption(String name, Int32? value)

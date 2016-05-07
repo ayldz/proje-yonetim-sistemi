@@ -14,7 +14,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.Milestone.ToList());
+            return View(context.Milestone.ToList().Where(m => SessionHelper.Current.AuthorizedFor(m, Helpers.DataOperations.Read)).ToList());
         }
 
         // GET: Milestone/Details/5
@@ -22,8 +22,14 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             Milestone mile = context.Milestone.Find(id);
-
-            return View(mile);
+            if (SessionHelper.Current.AuthorizedFor(mile, Helpers.DataOperations.Read))
+            {
+                return View(mile);
+            }
+            else {
+                TempData["Error"] = "Bu Kilometre taşını görüntülemek için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Milestone/Create
@@ -40,9 +46,17 @@ namespace ProjectMan.Controllers
             {
                 pmsContext context = new pmsContext();
                 Milestone mile = FormCollectionToModel(collection);
-                context.Milestone.Add(mile);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+                if (SessionHelper.Current.AuthorizedFor(mile, Helpers.DataOperations.Create))
+                {
+                    context.Milestone.Add(mile);
+                    context.SaveChanges();
+                    TempData["Info"] = "Yeni Kilometre Taşı başarı ile oluşturuldu.";
+                    return RedirectToAction("Index");
+                }
+                else {
+                    TempData["Error"] = "Bu kilometre taşını oluşturmak için yetkini bulunmamaktadır.";
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
@@ -56,7 +70,14 @@ namespace ProjectMan.Controllers
             pmsContext context = new pmsContext();
             Milestone kmtas = context.Milestone.Find(id);
 
-            return View(kmtas);
+            if (SessionHelper.Current.AuthorizedFor(kmtas, Helpers.DataOperations.Update))
+            {
+                return View(kmtas);
+            }
+            else {
+                TempData["Error"] = "Bu kilometre taşını güncellemek için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Milestone/Edit/5
@@ -71,6 +92,8 @@ namespace ProjectMan.Controllers
                 pmsContext context = new pmsContext();
                 context.Entry(kmtas).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
+
+                TempData["Info"] = "Kilometre Taşı bilgileri başarı ile güncellendi."
 
                 return RedirectToAction("Index");
             }
