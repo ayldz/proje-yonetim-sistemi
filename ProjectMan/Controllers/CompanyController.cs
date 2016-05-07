@@ -52,7 +52,7 @@ namespace ProjectMan.Controllers
                 {
                     context.Company.Add(comp);
                     context.SaveChanges();
-                    TempData["Info"] = "Yeni şirket kaydı oluşturuldu";
+                    TempData["Info"] = "Yeni şirket kaydı oluşturuldu.";
                     return RedirectToAction("Index");
                 }
                 else
@@ -112,6 +112,7 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             Company comp = context.Company.Find(id);
+
             if (SessionHelper.Current.AuthorizedFor(comp, DataOperations.Delete))
             {
                 context.Company.Remove(comp);
@@ -119,7 +120,8 @@ namespace ProjectMan.Controllers
                 TempData["Info"] = "1 Kayıt Silindi.";
                 return RedirectToAction("Index");
             }
-            else {
+            else
+            {
                 TempData["Error"] = "Silme işlemi için yetkiniz bulunmamaktadır.";
                 return RedirectToAction("Index");
             }

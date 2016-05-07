@@ -1,4 +1,5 @@
-﻿using ProjectMan.Models;
+﻿using ProjectMan.Helpers;
+using ProjectMan.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,7 +16,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.Project.ToList());
+            return View(context.Project.ToList().Where(c => SessionHelper.Current.AuthorizedFor(c, DataOperations.Read)).ToList());
         }
 
         // GET: Project/Details/5
@@ -23,8 +24,16 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             Project proje = context.Project.Find(id);
-
-            return View(proje);
+            if (SessionHelper.Current.AuthorizedFor(proje, DataOperations.Read))
+            {
+                return View(proje);
+            }
+            else
+            {
+                TempData["Error"] = "Bu proje bilgilerini görüntüleme yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
+            
         }
 
         // GET: Project/Create
@@ -41,9 +50,18 @@ namespace ProjectMan.Controllers
             {
                 pmsContext context = new pmsContext();
                 Project proje = FormCollectionToModel(collection);
-                context.Project.Add(proje);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (SessionHelper.Current.AuthorizedFor(proje, DataOperations.Create))
+                {
+                    context.Project.Add(proje);
+                    context.SaveChanges();
+                    TempData["Info"] = "Yeni proje kaydı oluşturuldu.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Create");
+                }
             }
             catch
             {
@@ -57,7 +75,16 @@ namespace ProjectMan.Controllers
             pmsContext context = new pmsContext(); 
             Project proje = context.Project.Find(id);
 
-            return View(proje);
+            if (SessionHelper.Current.AuthorizedFor(proje, DataOperations.Update))
+            {
+                return View(proje);
+            }
+            else
+            {
+                TempData["Error"] = "Bu proje kaydını güncellemek için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
+            
         }
 
         // POST: Project/Edit/5
@@ -73,6 +100,8 @@ namespace ProjectMan.Controllers
                 context.Entry(project).State = EntityState.Modified;
                 context.SaveChanges();
 
+                TempData["Info"] = "Proje bilgileri başarı ile güncellendi";
+
                 return RedirectToAction("Index");
             }
             catch
@@ -86,10 +115,19 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             Project proj = context.Project.Find(id);
-            context.Project.Remove(proj);
-            context.SaveChanges();
 
-            return RedirectToAction("Index");
+            if (SessionHelper.Current.AuthorizedFor(proj, DataOperations.Delete))
+            {
+                context.Project.Remove(proj);
+                context.SaveChanges();
+                TempData["Info"] = "1 Kayıt silindi.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["Error"] = "Silme işlemi için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult RenderOption(String name, Int32? value)

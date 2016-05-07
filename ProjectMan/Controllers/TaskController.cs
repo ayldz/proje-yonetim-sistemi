@@ -1,4 +1,5 @@
 ﻿using ProjectMan.Models;
+using ProjectMan.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.Task.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, Helpers.DataOperations.Read) == true).ToList());
+            return View(context.Task.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, DataOperations.Read)).ToList());
         }
 
         // GET: Task/Details/5
@@ -23,7 +24,15 @@ namespace ProjectMan.Controllers
             pmsContext context = new pmsContext();
             Task gorev = context.Task.Find(id);
 
-            return View(gorev);
+            if (SessionHelper.Current.AuthorizedFor(gorev, DataOperations.Read))
+            {
+                return View(gorev);
+            }
+            else
+            {
+                TempData["Error"] = "Bu görev bilgilerini görüntüleme yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Task/Create
@@ -40,9 +49,18 @@ namespace ProjectMan.Controllers
             {
                 pmsContext context = new pmsContext();
                 Task gorev = FormCollectionToModel(collection);
-                context.Task.Add(gorev);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+                if (SessionHelper.Current.AuthorizedFor(gorev, DataOperations.Create))
+                {
+                    context.Task.Add(gorev);
+                    context.SaveChanges();
+                    TempData["Info"] = "Yeni görev kaydı oluşturuldu.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = "Yeni görev kaydetmek için için yetkiniz bulunmamaktadır.";
+                    return RedirectToAction("Create");
+                }
             }
             catch
             {
@@ -55,7 +73,16 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             Task gorev = context.Task.Find(id);
-            return View(gorev);
+
+            if (SessionHelper.Current.AuthorizedFor(gorev, DataOperations.Update))
+            {
+                return View(gorev);
+            }
+            else
+            {
+                TempData["Error"] = "Bu görev kaydını güncellemek için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Task/Edit/5
@@ -70,6 +97,8 @@ namespace ProjectMan.Controllers
                 pmsContext context = new pmsContext();
                 context.Entry(task).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
+
+                TempData["Info"] = "Görev bilgileri başarı ile güncellendi.";
 
                 return RedirectToAction("Index");
             }
@@ -86,14 +115,16 @@ namespace ProjectMan.Controllers
             pmsContext context = new pmsContext();
             Task tsk = context.Task.Find(id);
 
-            if (SessionHelper.Current.AuthorizedFor(tsk, Helpers.DataOperations.Delete))
+            if (SessionHelper.Current.AuthorizedFor(tsk, DataOperations.Delete))
             {
                 context.Task.Remove(tsk);
                 context.SaveChanges();
-
+                TempData["Info"] = "1 Kayıt Silindi.";
                 return RedirectToAction("Index");
             }
-            else {
+            else
+            {
+                TempData["Error"] = "Silme işlemi için yetkiniz bulunmamaktadır.";
                 return RedirectToAction("Index");
             }
         }
@@ -110,7 +141,7 @@ namespace ProjectMan.Controllers
 
             gorev.name = fc["taskName"];
             gorev.description = fc["descriptionName"];
-            gorev.startdateplanned = new DateTime(Convert.ToInt32(sdp[2]),Convert.ToInt32(sdp[1]),Convert.ToInt32(sdp[0]));
+            gorev.startdateplanned = new DateTime(Convert.ToInt32(sdp[2]), Convert.ToInt32(sdp[1]), Convert.ToInt32(sdp[0]));
             gorev.enddateplanned = new DateTime(Convert.ToInt32(edp[2]), Convert.ToInt32(edp[1]), Convert.ToInt32(edp[0]));
             gorev.startdateactual = new DateTime(Convert.ToInt32(sda[2]), Convert.ToInt32(sda[1]), Convert.ToInt32(sda[0]));
             gorev.enddateactual = new DateTime(Convert.ToInt32(eda[2]), Convert.ToInt32(eda[1]), Convert.ToInt32(eda[0]));

@@ -1,4 +1,5 @@
-﻿using ProjectMan.Models;
+﻿using ProjectMan.Helpers;
+using ProjectMan.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,7 +16,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.User.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, Helpers.DataOperations.Read) == true).ToList());
+            return View(context.User.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, Helpers.DataOperations.Read)).ToList());
         }
 
         // GET: User/Details/5
@@ -23,8 +24,16 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             User kullanici = context.User.Find(id);
+            if (SessionHelper.Current.AuthorizedFor(kullanici, DataOperations.Read))
+            {
+                return View(kullanici);
+            }
+            else
+            {
+                TempData["Error"] = "Bu kullanıcı bilgilerini görüntüleme yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
 
-            return View(kullanici);
         }
 
         // GET: User/Create
@@ -41,9 +50,21 @@ namespace ProjectMan.Controllers
             {
                 pmsContext context = new pmsContext();
                 User kullanici = FormCollectionToModel(collection);
-                context.User.Add(kullanici);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (SessionHelper.Current.AuthorizedFor(kullanici, DataOperations.Create))
+                {
+                    context.User.Add(kullanici);
+                    context.SaveChanges();
+                    TempData["Info"] = "Yeni kullanıcı kaydı oluşturuldu.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = "Yeni kullanıcı kaydetmek için yetkiniz bulunmamaktadır.";
+                    return RedirectToAction("Index");
+                }
+
+
             }
             catch
             {
@@ -57,7 +78,17 @@ namespace ProjectMan.Controllers
             pmsContext context = new pmsContext();
             User kullanici = context.User.Find(id);
 
-            return View(kullanici);
+            if (SessionHelper.Current.AuthorizedFor(kullanici, DataOperations.Update))
+            {
+                return View(kullanici);
+            }
+            else
+            {
+                TempData["Error"] = "Bu kullanıcı kaydını güncellemek için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
+
+
         }
 
         // POST: User/Edit/5
@@ -73,6 +104,8 @@ namespace ProjectMan.Controllers
                 context.Entry(kullanici).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
+                TempData["Info"] = "Şirket bilgileri başarı ile güncellendi. ";
+
                 return RedirectToAction("Index");
             }
             catch
@@ -86,10 +119,19 @@ namespace ProjectMan.Controllers
         {
             pmsContext context = new pmsContext();
             User user = context.User.Find(id);
-            context.User.Remove(user);
-            context.SaveChanges();
 
-            return RedirectToAction("Index");
+            if (SessionHelper.Current.AuthorizedFor(user, DataOperations.Delete))
+            {
+                context.User.Remove(user);
+                context.SaveChanges();
+                TempData["Info"] = "1 Kayıt Silindi";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["Error"] = "Silme işlemi için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult RenderOption(String name, Int32? value)
