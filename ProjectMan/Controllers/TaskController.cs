@@ -20,7 +20,10 @@ namespace ProjectMan.Controllers
         // GET: Task/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Task gorev = context.Task.Find(id);
+
+            return View(gorev);
         }
 
         // GET: Task/Create

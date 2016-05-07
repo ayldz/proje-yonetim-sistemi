@@ -21,7 +21,10 @@ namespace ProjectMan.Controllers
         // GET: Company/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            pmsContext context = new pmsContext();
+            Company comp = context.Company.Find(id);
+
+            return View(comp);
         }
 
         // GET: Company/Create
