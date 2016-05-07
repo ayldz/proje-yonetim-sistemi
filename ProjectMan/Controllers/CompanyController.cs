@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ProjectMan.Controllers
 {
+    [LoggedIn]
     public class CompanyController : Controller
     {
         // GET: Company

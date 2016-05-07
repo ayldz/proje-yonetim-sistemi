@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ProjectMan.Controllers
 {
+    
     public class HomeController : Controller
     {
         // GET: Home
