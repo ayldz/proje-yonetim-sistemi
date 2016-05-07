@@ -5,17 +5,27 @@
 }
 
 <div class="page-header">
-    <h2>Tasks</h2>
+    <h2>Görevler</h2>
 </div>
+
 <p>
-    <a href="/Task/Create" class="btn btn-primary"> New Task</a>
-    
-</p>
+    <a href="/Task/Create" class="btn btn-primary"> Yeni Görev</a>    
+<p>
+
 <table class="table datatable">
     <thead>
         <tr>
             <th>
-                Task Name
+                Görev Adı
+            </th>
+            <th>
+                Proje
+            </th>
+            <th>
+                Atanan Kişi
+            </th>
+            <th>
+                İlerleme
             </th>
             <th>
 
@@ -26,10 +36,24 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
+                <td width="40%">
+                    @item.name
                 </td>
-                <td style="text-align: right">
+                <td width="15%">
+                    @item.Project1.name
+                </td>
+                <td width="15%">
+                    @item.User.name
+                </td>
+                <td width="10%">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow=" @item.progress "
+                             aria-valuemin="0" aria-valuemax="100" style="width:@item.progress%">
+                            <span class="sr-only">%@item.progress </span>
+                        </div>
+                    </div>
+                </td>
+                <td style="text-align: right" width="20%">
                     @Html.ActionLink("Güncelle", "Edit", new { id = item.id }) |
                     @Html.ActionLink("Detay", "Details", new { id = item.id }) |
                     @Html.ActionLink("Sil", "Delete", new { id = item.id })

@@ -102,6 +102,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dataTables.bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
     <Content Include="Content\flat-ui.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
@@ -122,6 +123,7 @@
     <Content Include="images\sort_both.png" />
     <Content Include="images\sort_desc.png" />
     <Content Include="images\sort_desc_disabled.png" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons\flat-ui-icons-regular.eot" />

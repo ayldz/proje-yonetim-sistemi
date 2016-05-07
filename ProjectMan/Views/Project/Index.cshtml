@@ -5,32 +5,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <h2>Projeler</h2>
+</div>
 
 <p>
-    @Html.ActionLink("Yeni", "Create")
+    <a href="/Project/Create" class="btn btn-primary"> Yeni Proje</a>
 </p>
-<table>
-    <tr>
-        <th>
-            Project Name
-        </th>
-        <th>
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th>
+                Proje Adı
+            </th>
+            <th>
+                Müşteri
+            </th>
+            <th>
+                Yönetici
+            </th>
+            <th>
+                İlerleme
+            </th>
+            <th>
 
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @item.name
-        </td>
-        <td>
-            @Html.ActionLink("Güncelle", "Edit", new { id = item.id}) | 
-            @Html.ActionLink("Detay", "Details", new { id = item.id }) | 
-            @Html.ActionLink("Sil", "Delete", new { id = item.id })
-        </td>
-    </tr>
-    }
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="40%">
+                    @item.name
+                </td>
+                <td width="15%">
+                    @item.Company1.name
+                </td>
+                <td width="15%">
+                    @item.User.name
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow=" @item.progress "
+                             aria-valuemin="0" aria-valuemax="100" style="width:@item.progress%">
+                            <span class="sr-only">%@item.progress </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    @Html.ActionLink("Güncelle", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Detay", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Sil", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
