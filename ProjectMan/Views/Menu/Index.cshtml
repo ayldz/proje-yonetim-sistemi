@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjectMan.Models.Menu>
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2>Menu</h2>
+</div>
+
+<p>
+    <a href="/Menu/Create" class="btn btn-primary"> Yeni Menu</a>
+</p>
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th>
+                Icon
+            </th>
+            <th>
+                Text
+            </th>
+            <th>
+                Controller
+            </th>
+            <th>
+                Action
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="40%">
+                    @item.icon
+                </td>
+                <td width="15%">
+                    @item.text
+                </td>
+                <td width="15%">
+                    @item.controller
+                </td>
+                <td>
+                    @item.action
+                </td>
+                <td>
+                    @Html.ActionLink("Güncelle", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Sil", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
