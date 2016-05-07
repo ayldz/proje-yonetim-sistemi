@@ -59,17 +59,23 @@ namespace ProjectMan.Controllers
 
         // POST: User/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,username,password,name,surname,position")] User user)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            pmsContext context = new pmsContext();
-            if (ModelState.IsValid)
+            try
             {
-                context.Entry(user).State = EntityState.Modified;
+                User kullanici = this.FormCollectionToModel(collection);
+                kullanici.id = id;
+
+                pmsContext context = new pmsContext();
+                context.Entry(kullanici).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            return View(user);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: User/Delete/5
