@@ -27,7 +27,12 @@ namespace ProjectMan.Helpers
 
         public override bool Read()
         {
-            return (UserPosition == UserPositions.Customer) ? false : true;
+            if (UserPosition == UserPositions.Customer){
+                return (Company.user == User.id) ? true : false;
+            }
+            else {
+                return false;
+            }
         }
 
         public override bool Update()

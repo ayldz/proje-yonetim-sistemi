@@ -35,8 +35,7 @@ namespace ProjectMan.Helpers
         {
             if (UserPosition == UserPositions.Customer)
             {
-                //TODO:
-                return (Project.Company1.contactemail == User.username) ? true : false;
+                return (Project.Company1.user == User.id) ? true : false;
             }
             else {
                 return true;

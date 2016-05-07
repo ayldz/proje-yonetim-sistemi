@@ -41,7 +41,7 @@ namespace ProjectMan.Helpers
         {
             if (UserPosition == UserPositions.Customer)
             {
-                return (Milestone.Project1.Company1.contactemail == User.name) ? true : false;
+                return (Milestone.Project1.Company1.user == User.id) ? true : false;
             }
             else {
                 return true;

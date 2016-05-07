@@ -54,7 +54,7 @@ namespace ProjectMan.Controllers
         // GET: Project/Edit/5
         public ActionResult Edit(int id)
         {
-            pmsContext context = new pmsContext();
+            pmsContext context = new pmsContext(); 
             Project proje = context.Project.Find(id);
 
             return View(proje);
