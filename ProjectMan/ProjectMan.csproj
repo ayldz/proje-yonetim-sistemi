@@ -225,6 +225,7 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\Shared\_ProjectSelect.cshtml" />
     <Content Include="Views\Shared\_MilestoneSelect.cshtml" />
+    <Content Include="Views\Shared\_UserSelect.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

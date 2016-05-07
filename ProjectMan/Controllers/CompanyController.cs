@@ -103,6 +103,7 @@ namespace ProjectMan.Controllers
             model.contactname = fc["contactName"];
             model.contactemail = fc["contactEmail"];
             model.contacttel = fc["contactTel"];
+            model.user = Convert.ToInt32(fc["user"]);
 
             return model;
         }
