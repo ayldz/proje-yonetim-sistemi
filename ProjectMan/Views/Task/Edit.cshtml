@@ -71,7 +71,7 @@
         <div class="col-sm-12">
             <label for="proje" class="col-sm-2 form-control-label">Proje :</label>
             <div class="col-sm-10">
-                @{Html.RenderAction("RenderOption", "Project", new { name = "project", value= Model.project });}
+                @{Html.RenderAction("RenderOption", "Project", new { name = "project", value = Model.project });}
             </div>
         </div>
     </div>
@@ -81,7 +81,6 @@
             <label for="milestone" class="col-sm-2 form-control-label">Kilometre Taşı :</label>
             <div class="col-sm-10">
                 @{Html.RenderAction("RenderOption", "Milestone", new { name = "milestone", value = Model.milestone });}
-                <input type="text" class="form-control" id="milestone" name="milestone" placeholder="Kilometre Taşı" value="@Model.milestone">
             </div>
         </div>
     </div>

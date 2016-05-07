@@ -91,11 +91,14 @@ namespace ProjectMan.Controllers
             return RedirectToAction("Index");
         }
 
-      /*  public ActionResult RenderOption()
+        public ActionResult RenderOption(String name, Int32? value)
         {
-
+            pmsContext contex = new pmsContext();
+            List<Milestone> list = contex.Milestone.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, Helpers.DataOperations.Read)).ToList();
+            Tuple<string, Int32?, List<Milestone>> model = new Tuple<string, Int32?, List<Milestone>>(name, value, list);
+            return PartialView("_MilestoneSelect", model);
         }
-        */
+        
         private Milestone FormCollectionToModel(FormCollection fc)
         {
             var mile = new Milestone();
