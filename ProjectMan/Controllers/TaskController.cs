@@ -115,7 +115,7 @@ namespace ProjectMan.Controllers
             gorev.startdateactual = new DateTime(Convert.ToInt32(sda[2]), Convert.ToInt32(sda[1]), Convert.ToInt32(sda[0]));
             gorev.enddateactual = new DateTime(Convert.ToInt32(eda[2]), Convert.ToInt32(eda[1]), Convert.ToInt32(eda[0]));
             gorev.progress = Convert.ToInt16(fc["progress"]);
-            gorev.project = Convert.ToInt32(fc["proje"]);
+            gorev.project = Convert.ToInt32(fc["project"]);
             gorev.milestone = Convert.ToInt32(fc["milestone"]);
             gorev.assingto = Convert.ToInt32(fc["assingTo"]);
 

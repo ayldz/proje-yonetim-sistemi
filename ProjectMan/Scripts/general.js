@@ -3,6 +3,7 @@
 function init() {
     renderDateTables();
     renderDatePickers();
+    renderSelects();
 }
 
 function renderDateTables() {
@@ -40,4 +41,8 @@ function renderDatePickers() {
         language: "tr",
         todayHighlight: true
     });
+}
+
+function renderSelects() {
+    $('.select2').select2();
 }

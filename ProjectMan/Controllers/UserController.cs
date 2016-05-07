@@ -15,7 +15,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.User.ToList());
+            return View(context.User.ToList().Where(p => SessionHelper.Current.AuthorizedFor(p, Helpers.DataOperations.Read) == true).ToList());
         }
 
         // GET: User/Details/5
