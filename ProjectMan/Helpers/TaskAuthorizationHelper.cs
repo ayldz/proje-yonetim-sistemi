@@ -19,7 +19,7 @@ namespace ProjectMan.Helpers
         {
             if (UserPosition == UserPositions.Customer)
             {
-                return false;
+                return (Task.Project1.Company1.user == User.id) ? true : false;
             }
             else if (UserPosition == UserPositions.Developer)
             {
