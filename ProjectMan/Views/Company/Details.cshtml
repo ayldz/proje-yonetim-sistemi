@@ -1,0 +1,67 @@
+﻿@model ProjectMan.Models.Company
+
+@{
+    ViewBag.Title = "Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2>Detay: @Model.name</h2>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="companyName" class="col-sm-2 form-control-label">Ad :</label>
+        <div class="col-sm-10">
+            @Model.name
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="companyAdress" class="col-sm-2 form-control-label">Adres :</label>
+        <div class="col-sm-10">
+            @Model.adress
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="billedTo" class="col-sm-2 form-control-label">Fatura Adresi :</label>
+        <div class="col-sm-10">
+            @Model.billedto
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="contactName" class="col-sm-2 form-control-label">Yetkili Kişi :</label>
+        <div class="col-sm-10">
+            @Model.contactname 
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="contactEmail" class="col-sm-2 form-control-label">Yetkili Kişi e-Posta :</label>
+        <div class="col-sm-10">
+            @Model.contactemail
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-12">
+        <label for="contactTel" class="col-sm-2 form-control-label">Yetkili Kişi Telefon :</label>
+        <div class="col-sm-10">
+            @Model.contacttel
+        </div>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary"> Kaydet </button> <a href="/Company/Index" class="btn btn-primary">Geri Dön</a>

@@ -1,0 +1,15 @@
+﻿@model Tuple<String, Int32?, List<ProjectMan.Models.Milestone>>
+
+<select class="form-control select select-primary select-block mbl select2" name="@Model.Item1">
+    @foreach (var item in Model.Item3)
+    {
+        if (Model.Item2.HasValue && item.id == Model.Item2.Value)
+        {
+            <option value="@item.id" selected="selected"> @item.name </option>
+        }
+        else
+        {
+            <option value="@item.id"> @item.name </option>
+        }
+    }
+</select>
