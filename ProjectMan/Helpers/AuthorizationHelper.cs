@@ -30,14 +30,19 @@ namespace ProjectMan.Helpers
             {
                 return new TaskAuthorizationHelper(model);
             }
-            else if (type.BaseType == typeof(Models.User)) {
+            else if (type.BaseType == typeof(Models.User))
+            {
                 return new UserAuthorizationHelper(model);
+            }
+            else if (type.BaseType == typeof(Models.Menu)) {
+                return new MenuAuthorizationHelper(model);
             }
             else
             {
                 return new InvalidAuthorizationHelper(model);
             }
         }
+
     }
 
     public abstract class AuthorizationBase {

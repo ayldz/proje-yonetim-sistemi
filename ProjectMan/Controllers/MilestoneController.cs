@@ -93,7 +93,7 @@ namespace ProjectMan.Controllers
                 context.Entry(kmtas).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
-                TempData["Info"] = "Kilometre Taşı bilgileri başarı ile güncellendi."
+                TempData["Info"] = "Kilometre Taşı bilgileri başarı ile güncellendi.";
 
                 return RedirectToAction("Index");
             }

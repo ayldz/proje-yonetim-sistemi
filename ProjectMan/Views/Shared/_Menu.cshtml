@@ -1,0 +1,19 @@
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    ProjectMan.Models.pmsContext context = new ProjectMan.Models.pmsContext();
+    var Model = context.Menu.ToList().Where(m => SessionHelper.Current.AuthorizedFor(m, ProjectMan.Helpers.DataOperations.Read)).ToList();
+
+}
+
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        @foreach (var menu in Model)
+        {
+            var url = menu.controller + "/" + menu.action;
+            <li @if (menu.controller == controllerName) { <text> class="active" </text>  }>
+                <a href="/@url"><i class="@menu.icon"></i> @menu.text</a>
+            </li>
+        }
+
+    </ul>
+</div>
