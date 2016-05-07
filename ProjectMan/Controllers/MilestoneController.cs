@@ -1,4 +1,5 @@
-﻿using ProjectMan.Models;
+﻿using ProjectMan.Helpers;
+using ProjectMan.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace ProjectMan.Controllers
         public ActionResult Index()
         {
             pmsContext context = new pmsContext();
-            return View(context.Milestone.ToList().Where(m => SessionHelper.Current.AuthorizedFor(m, Helpers.DataOperations.Read)).ToList());
+            return View(context.Milestone.ToList().Where(m => SessionHelper.Current.AuthorizedFor(m, DataOperations.Read)).ToList());
         }
 
         // GET: Milestone/Details/5
@@ -46,6 +47,7 @@ namespace ProjectMan.Controllers
             {
                 pmsContext context = new pmsContext();
                 Milestone mile = FormCollectionToModel(collection);
+
                 if (SessionHelper.Current.AuthorizedFor(mile, Helpers.DataOperations.Create))
                 {
                     context.Milestone.Add(mile);
@@ -53,7 +55,8 @@ namespace ProjectMan.Controllers
                     TempData["Info"] = "Yeni Kilometre Taşı başarı ile oluşturuldu.";
                     return RedirectToAction("Index");
                 }
-                else {
+                else
+                {
                     TempData["Error"] = "Bu kilometre taşını oluşturmak için yetkini bulunmamaktadır.";
                     return RedirectToAction("Index");
                 }
@@ -93,7 +96,7 @@ namespace ProjectMan.Controllers
                 context.Entry(kmtas).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
-                TempData["Info"] = "Kilometre Taşı bilgileri başarı ile güncellendi."
+                TempData["Info"] = "Kilometre Taşı bilgileri başarı ile güncellendi.";
 
                 return RedirectToAction("Index");
             }
@@ -107,11 +110,20 @@ namespace ProjectMan.Controllers
         public ActionResult Delete(int id)
         {
             pmsContext context = new pmsContext();
-            Milestone ms = context.Milestone.Find(id);
-            context.Milestone.Remove(ms);
-            context.SaveChanges();
+            Milestone mile = context.Milestone.Find(id);
 
-            return RedirectToAction("Index");
+            if (SessionHelper.Current.AuthorizedFor(mile, DataOperations.Delete))
+            {
+                context.Milestone.Remove(mile);
+                context.SaveChanges();
+                TempData["Info"] = "1 Kayıt Silindi.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["Error"] = "Silme işlemi için yetkiniz bulunmamaktadır.";
+                return RedirectToAction("Index");
+            }      
         }
 
         public ActionResult RenderOption(String name, Int32? value)
