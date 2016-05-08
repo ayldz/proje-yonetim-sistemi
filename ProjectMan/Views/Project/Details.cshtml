@@ -68,7 +68,7 @@
     <div class="col-sm-12">
         <label for="company" class="col-sm-2 form-control-label">Şirket :</label>
         <div class="col-sm-10">
-            @Model.company
+            @Model.Company1.name
         </div>
     </div>
 </div>
@@ -77,7 +77,8 @@
     <div class="col-sm-12">
         <label for="projectManager" class="col-sm-2 form-control-label">Proje Yöneticisi :</label>
         <div class="col-sm-10">
-             @Model.projectmanager
+             @{ var fullname = Model.User.name + " " + Model.User.surname;}
+             @fullname
         </div>
     </div>
 </div>

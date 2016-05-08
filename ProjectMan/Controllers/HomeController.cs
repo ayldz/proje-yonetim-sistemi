@@ -24,7 +24,7 @@ namespace ProjectMan.Controllers
             Boolean success = SessionHelper.Current.Login(Username, Password);
             if (success)
             {
-                return Redirect("/Home/Dashboard");
+                return RedirectToAction("Index", "Project");
             }
             else {
                 ViewData["LoginError"] = true;
