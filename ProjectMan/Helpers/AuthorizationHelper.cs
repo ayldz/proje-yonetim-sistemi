@@ -14,27 +14,27 @@ namespace ProjectMan.Helpers
         public static AuthorizationBase GetHelper(object model) {
             Type type = model.GetType();
 
-            if (type.BaseType == typeof(Models.Company))
+            if (type == typeof(Models.Company) || type.BaseType == typeof(Models.Company))
             {
                 return new CompanyAuthorizationHelper(model);
             }
-            else if (type.BaseType == typeof(Models.Milestone))
+            else if ( type == typeof(Models.Milestone) || type.BaseType == typeof(Models.Milestone))
             {
                 return new MilestoneAuthorizationHelper(model);
             }
-            else if (type.BaseType == typeof(Models.Project))
+            else if (type == typeof(Models.Project) || type.BaseType == typeof(Models.Project))
             {
                 return new ProjectAuthorizationHelper(model);
             }
-            else if (type.BaseType == typeof(Models.Task))
+            else if (type == typeof(Models.Task) || type.BaseType == typeof(Models.Task))
             {
                 return new TaskAuthorizationHelper(model);
             }
-            else if (type.BaseType == typeof(Models.User))
+            else if (type == typeof(Models.User) || type.BaseType == typeof(Models.User))
             {
                 return new UserAuthorizationHelper(model);
             }
-            else if (type.BaseType == typeof(Models.Menu)) {
+            else if (type == typeof(Models.Menu) || type.BaseType == typeof(Models.Menu)) {
                 return new MenuAuthorizationHelper(model);
             }
             else

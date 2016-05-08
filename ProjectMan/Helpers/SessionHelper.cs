@@ -19,17 +19,23 @@ namespace ProjectMan
             }
         }
 
-        private static SessionHelper _instance;
+        private static Dictionary<String, SessionHelper> _instances;
 
         public static SessionHelper Current
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = new SessionHelper();
+                string sessionid = HttpContext.Current.Session.SessionID;
+
+                if (_instances == null) {
+                    _instances = new Dictionary<string, SessionHelper>();
                 }
-                return _instance;
+
+                if (!_instances.ContainsKey(sessionid))
+                {
+                    _instances.Add(sessionid, new SessionHelper());
+                }
+                return _instances[sessionid];
             }
         }
 

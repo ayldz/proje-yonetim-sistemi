@@ -18,7 +18,9 @@ namespace ProjectMan.Helpers
         {
             if (UserPosition == UserPositions.ProjectManager)
             {
-                return (Milestone.Project1.projectmanager == User.id) ? true : false;
+                Models.pmsContext context = new Models.pmsContext();
+                Models.Project project = context.Project.Find(Milestone.project);
+                return (project.projectmanager == User.id) ? true : false;
             }
             else {
                 return false;
@@ -52,7 +54,9 @@ namespace ProjectMan.Helpers
         {
             if (UserPosition == UserPositions.ProjectManager)
             {
-                return (Milestone.Project1.projectmanager == User.id) ? true : false;
+                ProjectMan.Models.pmsContext context = new Models.pmsContext();
+                ProjectMan.Models.Project project = context.Project.Find(Milestone.project);
+                return (project.projectmanager == User.id) ? true : false;
             }
             else
             {

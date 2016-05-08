@@ -31,7 +31,7 @@ namespace ProjectMan.Helpers
                 return (Company.user == User.id) ? true : false;
             }
             else {
-                return false;
+                return true;
             }
         }
 
